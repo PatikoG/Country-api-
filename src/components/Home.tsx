@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Country } from '../types';
+import { Option } from './small-components/SearchAndFilter';
 
 
 interface Props{
@@ -9,13 +10,18 @@ interface Props{
 };
 
 
-const Home: React.FC<{darkMode : boolean; data : Country[]}> = (props) => {
+const Home: React.FC<{darkMode : boolean; data : Country[]; selectedOption : Option | null;  searchText : string; }> = (props) => {
+
+  const countries = props.data.filter((item) => props.selectedOption && props.selectedOption.value !== 'All' ? item['continents'].includes(props.selectedOption?.value || '') : props.data);
+
+  const searchCountries = countries.filter((item) => item.name.common.includes(props.searchText))
+  
 
   return (
     <Main>
       
       
-      {props.data.map((country : Country) => (
+      {searchCountries.map((country : Country) => (
         <Cards darkMode={props.darkMode} key={country.name.common}>
           <Link to={`/country/${country.name.common}`}>
             <Flags src={country.flags.png}/>

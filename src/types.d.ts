@@ -3,6 +3,7 @@
 export interface Country{
     altSpellings:string[];
     area: number;
+    borders: string[];
     capital: string[];
     capitalInfo: {
         latlng:number[],
@@ -48,9 +49,8 @@ export interface Country{
     };
     independent:boolean;
     landlocked:boolean;
-    languages:{
-        eng:string,
-    };
+    languages:Language,
+    
     latlng:number[];
     maps:{
         googleMaps:string,
@@ -89,4 +89,8 @@ export interface NativeNames{
 export interface Native{
     [Key : string]: NativeNames;   
     official:string;
+}
+
+export interface Language{
+    [Key : string] : string;
 }

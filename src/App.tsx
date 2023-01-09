@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
-
 import Info from './components/Info';
 import Header from './components/small-components/Header';
-import SearchInput from './components/small-components/SearchAndFilter';
+import SearchInput, { Option } from './components/small-components/SearchAndFilter';
 import styled from 'styled-components';
 import Home from './components/Home';
 import { Country } from './types';
@@ -22,20 +21,22 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
-  console.log(data);
+ 
+  
   const [darkMode, setDarkMode] = useState(false);
-
-
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [searchText, setSearchText] = useState('');
   
 
   return (
     <BackgroundChange darkMode={darkMode}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
-      <SearchInput/>
-      
-
+      <SearchInput 
+      selectedOption={selectedOption}  setSelectedOption={setSelectedOption} 
+      darkMode={darkMode} 
+      searchText={searchText} setSearchText={setSearchText}/>
       <Routes>
-        <Route path='/' element={<Home data={data} darkMode={darkMode}/>}></Route>
+        <Route path='/' element={<Home data={data} darkMode={darkMode} selectedOption={selectedOption} searchText={searchText}/>}></Route>
         <Route path='/country/:country' element={<Info data={data} darkMode={darkMode}/>}></Route>
       </Routes>
     </BackgroundChange>
