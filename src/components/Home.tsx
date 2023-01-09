@@ -16,7 +16,7 @@ const Home: React.FC<{darkMode : boolean; data : Country[]; selectedOption : Opt
 
   const searchCountries = countries.filter((item) => item.name.common.includes(props.searchText))
   
-
+// console.log(searchCountries)
   return (
     <Main>
       

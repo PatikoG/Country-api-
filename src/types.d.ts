@@ -21,12 +21,8 @@ export interface Country{
         svg:string;
     };
     continents:string[];
-    currencies:{
-        XCD:{
-            name:string,
-            symbol:string,
-        };
-    };
+    currencies:Currency;
+    
     demonyms:{
         eng:{
             f:string,
@@ -93,4 +89,8 @@ export interface Native{
 
 export interface Language{
     [Key : string] : string;
+}
+
+export interface Currency{
+    [Key : string] : string; 
 }

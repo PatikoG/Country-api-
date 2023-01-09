@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components';
-import { Country, Native, NativeNames } from '../types';
+import { Country, Currency, Native, NativeNames } from '../types';
 import Arrow from '../assets/back-arrow.png'
 
 
@@ -16,14 +16,17 @@ const Info: React.FC <{darkMode : boolean; data : Country[]}> = (props) => {
   let names : string[] = [];
   let nameNativenames : NativeNames = {common: '', official: ''};
   let language : string = '';
+  let currencie : string[] = [];
+  
 
   if (FilterData){
     language= Object.values(FilterData.languages)[0];
-    names = Object.keys(FilterData?.name?.nativeName)
+    names = Object.keys(FilterData?.name?.nativeName);
+    currencie = Object.keys(FilterData?.currencies);
     const lastName = names[names.length - 1] as keyof Native;
     nameNativenames = FilterData?.name?.nativeName[lastName];
   }
-
+  
   return (
     <div>
 
@@ -46,7 +49,7 @@ const Info: React.FC <{darkMode : boolean; data : Country[]}> = (props) => {
           </NamesPopRegCap>
           <DomainCurrLang>
             <p>Top Level Domain: {FilterData?.tld}</p>
-            <p>Currencies: {FilterData?.currencies?.XCD?.name} </p>
+            <p>Currencies: {currencie.join(', ')} </p>
             <p>Languages: {language}</p>
           </DomainCurrLang>
         </FlexedInfos>
