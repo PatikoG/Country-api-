@@ -22,7 +22,7 @@ const App: React.FC = () => {
   }, []);
 
  
-  
+
   const [darkMode, setDarkMode] = useState(false);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [searchText, setSearchText] = useState('');
